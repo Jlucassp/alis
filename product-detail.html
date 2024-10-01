@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhe do Produto</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    
+    <section id="product-header">
+        <div class="logo-container">
+            <a href="index.html"><img src="./img/logo-preto.png" class="logo" alt="Alis Fitness Logo"></a>
+        </div>
+        
+        <div class="nav-menu">
+            <ul id="navbar">
+                <li><a href="#">LANÇAMENTO</a></li>
+                <li>
+                    <a href="#">MASCULINO</a>
+                    <div class="dropdown">
+                        <h4>ROUPAS MASCULINAS</h4>
+                        <ul>
+                            <li><a href="./camisas-masculino.html">Camisas</a></li>
+                            <li><a href="./shorts-masculino.html">Shorts</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a href="#">FEMININO</a>
+                    <div class="dropdown">
+                        <h4>ROUPAS FEMININAS</h4>
+                        <ul>
+                            <li><a href="./tops-feminino.html">Tops</a></li>
+                            <li><a href="./leggings-feminino.html">Leggings</a></li>
+                            <li><a href="./shorts-feminino.html">Shorts</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li><a href="#">OFERTAS</a></li>
+                <li><a href="#">COLEÇÕES</a></li>
+                <li><a href="#">SOBRE NÓS</a></li>
+                <!-- <li><a href="#">CONTATO</a></li> -->
+            </ul>
+        </div>
+
+        <div class="nav-extra">
+            <ul id="navbar-icons">
+                <li id="search-icon"><a href="#"><i class="fa-solid fa-magnifying-glass"></i></a></li>
+                <li id="cart-icon-container">
+                    <a href="#"><i class="fa-solid fa-bag-shopping" id="cart-icon"></i></a>
+                    <span id="cart-count">0</span>
+                </li>
+                <li id="user-icon"><a href=""><i class="fa-solid fa-user"></i></a></li>
+                <a href="#" id="close"><i class="fa-solid fa-xmark"></i></a>
+            </ul>
+        </div>
+
+        <div id="mobile">
+            <i id="bar" class="fa-solid fa-bars"></i>
+            <a href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
+            <a href="#"><i class="fa-solid fa-bag-shopping"></i></a>
+        </div>
+    </section>
+
+    <section id="produtos-promo-section">
+        <div id="promo-banner">
+            <div class="promo-text">
+                <p>Frete grátis a partir de R$290,00</p>
+                <p>Entregas para todo o Brasil</p>
+                <p>Frete grátis a partir de R$290,00</p>
+                <p>Entregas para todo o Brasil</p>
+                <p>Frete grátis a partir de R$290,00</p>
+                <p>Entregas para todo o Brasil</p>
+                <p>Frete grátis a partir de R$290,00</p>
+                <p>Entregas para todo o Brasil</p>
+                <p>Frete grátis a partir de R$290,00</p>
+                <p>Entregas para todo o Brasil</p>
+                <p>Frete grátis a partir de R$290,00</p>
+                <p>Entregas para todo o Brasil</p>
+                <p>Frete grátis a partir de R$290,00</p>
+                <p>Entregas para todo o Brasil</p>
+                <p>Frete grátis a partir de R$290,00</p>
+                <p>Entregas para todo o Brasil</p>
+            </div>
+
+            <div class="promo-text">
+                <p>Frete grátis a partir de R$290,00</p>
+                <p>Entregas para todo o Brasil</p>
+                <p>Frete grátis a partir de R$290,00</p>
+                <p>Entregas para todo o Brasil</p>
+                <p>Frete grátis a partir de R$290,00</p>
+                <p>Entregas para todo o Brasil</p>
+                <p>Frete grátis a partir de R$290,00</p>
+                <p>Entregas para todo o Brasil</p>
+                <p>Frete grátis a partir de R$290,00</p>
+                <p>Entregas para todo o Brasil</p>
+                <p>Frete grátis a partir de R$290,00</p>
+                <p>Entregas para todo o Brasil</p>
+                <p>Frete grátis a partir de R$290,00</p>
+                <p>Entregas para todo o Brasil</p>
+                <p>Frete grátis a partir de R$290,00</p>
+                <p>Entregas para todo o Brasil</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="product-detail-section">
+        <div class="product-detail-container">
+            <div class="product-images">
+                <img id="main-product-image" alt="Imagem do Produto">
+                <div id="product-thumbnails" class="product-thumbnails"></div>
+            </div>
+
+            <div class="product-info">
+                <h1 id="product-title" class="product-title"></h1>
+                <p id="product-price" class="product-price"></p>
+
+                <div class="product-options">
+                    <div class="color-options">
+                        <label for="color">Cor: <span id="selected-color-name"></span></label>
+                        <div id="color-options-container"></div>
+                    </div>
+
+                    <label for="size">Tamanho: <span id="selected-size-name"></span></label>
+                    <div id="sizes-options-container"></div>
+
+                    <div class="try-on-size-chart">
+                        <button class="btn-virtual-try">
+                            <img src="./img/icon/clothes-hanger.png" alt="Provador Icon" class="icon">Provador Virtual
+                        </button>
+                        <button class="btn-size-chart">
+                            <img src="./img/icon/width.png" alt="Ruler Icon" class="icon">Tabela de Medidas
+                        </button>
+                    </div>
+
+                    <label for="quantity">Quantidade:</label>
+                    <div class="quantity-selector">
+                        <button class="quantity-btn-sproduct minus">-</button>
+                        <input type="number" id="quantity" class="product-quantity" value="1" min="1" max="10">
+                        <button class="quantity-btn-sproduct plus">+</button>
+                    </div>
+
+                    <div class="product-actions">
+                        <button class="btn-add-to-cart" onclick="addToCart('CAMISA ALIS FITNESS', 299.90, './img/products/p1_1.jpg')">Adicionar ao Carrinho</button>
+                        <button class="btn-wishlist" title="Lista de Desejos">
+                            <img src="./img/icon/heart.png" alt="Favoritar Icon">
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-description">
+                    <h2>Descrição do Produto</h2>
+                    <p id="product-description"></p>
+                </div>
+
+                <div class="additional-info">
+                    <div class="info-item">
+                        <button class="info-title" onclick="toggleInfo(this)">Indicado Para</button>
+                        <div class="info-content" id="info-recommended"></div>
+                    </div>
+                    <div class="info-item">
+                        <button class="info-title" onclick="toggleInfo(this)">Modelo</button>
+                        <div class="info-content" id="model-info"></div>
+                    </div>
+                    <div class="info-item">
+                        <button class="info-title" onclick="toggleInfo(this)">Composição</button>
+                        <div class="info-content" id="info-composition"></div>
+                    </div>
+                    <div class="info-item">
+                        <button class="info-title" onclick="toggleInfo(this)">Entregas e Devoluções</button>
+                        <div class="info-content" id="info-shipping"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="page-overlay"></div>
+
+    <div id="cart-sidebar" class="cart-sidebar-hidden">
+        <div class="cart-sidebar-header">
+            <h3>CARRINHO</h3>
+            <button id="close-cart" class="close-cart-btn">&times;</button>
+        </div>
+
+        <div id="free-shipping-container">
+            <p id="free-shipping-text">Frete grátis a partir de R$290,00</p>
+            <div id="progress-bar-container">
+                <div id="progress-bar"></div>
+            </div>
+        </div>
+
+        <div id="cart-items-container"></div>
+
+        <div id="empty-cart-message" style="display:none;">
+            <p class="empty-cart-text">Seu Carrinho está vazio!</p>
+            <p class="empty-cart-subtext">Clique no botão abaixo e procure pelo seu produto!</p>
+            <button id="find-products-btn" class="find-products-btn">PROCURAR</button>
+        </div>
+
+        <div class="cart-sidebar-footer">
+            <p id="cart-subtotal">Subtotal: R$0,00</p>
+            <button id="checkout-btn" class="checkout-btn">Finalizar Compra</button>
+        </div>
+    </div>
+
+    <footer class="section-p1">
+        <div class="top-footer">
+            <!-- <div class="logo-container">
+                <a href="index.html"><img src="./img/alis - frase vectorizada_Prancheta 1 cópia (1).png" class="logo" alt="Slogan 'All Life is Simple'"></a>
+            </div> -->
+
+            <div class="newsletter">
+                <div class="news-text">
+                    <p>Gostou dos nossos produtos? Cadastre-se e fique por dentro das nossas novidades e ofertas.</p>
+                </div>
+    
+                <div class="form">
+                    <input type="email" placeholder="Insira seu e-mail" class="newsletter-input">
+                    <button class="newsletter-btn">Cadastrar</button>
+                    <a href="#"><i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom-footer">
+            <div class="col">
+                <h4>Contato</h4>
+                <p><strong>E-mail:</strong> alisoriginalfitness@gmail.com</p>
+                <p><strong>Whatsapp:</strong> +55 (85) 92001-4169</p>
+                <p><strong>Horário de atendimento:</strong> de segunda à sábado <br> 08:00-18:00</p>
+            </div>
+
+            <div class="col">
+                <h4>Dúvidas</h4>
+                <a href="#">Sobre nós</a>
+                <a href="#">Informações de entrega</a>
+                <a href="#">Política de Privacidade</a>
+                <a href="#">Termos & Condições</a>
+                <a href="#">Fale Conosco</a>
+            </div>
+    
+            <div class="col">
+                <h4>Minha Conta</h4>
+                <a href="#">Entrar</a>
+                <a href="#">Ver Carrinho</a>
+                <a href="#">Minha Lista de Desejos</a>
+                <a href="#">Rastrear Pedido</a>
+                <a href="#">Ajuda</a>
+            </div>
+
+            <!-- <div class="col">
+                <h4>Redes Sociais</h4>
+                <div class="icon">
+                    <i class="fab fa-facebook-f"></i>
+                    <i class="fab fa-instagram"></i>
+                    <i class="fab fa-pinterest-p"></i>
+                    <i class="fab fa-youtube"></i>
+                </div>
+            </div> -->
+
+            <div class="col">
+                <h4>Formas de Pagamento</h4>
+                <div class="pay-icons">
+                    <img class="visa-img" src="./img/pay/visa-logo.png" alt="">
+                    <img class="pix-img" src="./img/pay/logo-pix.png" alt="">
+                    <img class="mastercard-img" src="./img/pay/mastercard-logo.png" alt="">
+                    <img class="paypal-img" src="./img/pay/paypal-logo.png" alt="">
+                </div>
+            </div>
+        </div>
+
+        <div id="copyright">
+            <p>CNPJ "XXXXXXXX" - © 2024 Alis - Todos os direitos reservados.</p>
+            <p>Desenvolvido por João Lucas Paiva</p>
+        </div>
+    </footer>
+
+    <script>
+    // Product Details
+
+    const products = {
+      "camisa-locus": {
+        "title": "Camisa Locus",
+        "price": "129,00",
+        "images": [
+            "./img/products/p1_1.jpg",
+            "./img/products/p1_2.jpg",
+            "./img/products/p2_1.jpg",
+            "./img/products/p2_2.jpg"
+        ],
+        colors: ["#84997E"],
+        sizes: ["P", "M", "G", "GG ", "XG"],
+        description: "A Camisa Locus é a escolha perfeita para quem busca conforto e alta performance. Feita com tecido 100% poliamida dry fit, ela oferece leveza, respirabilidade e secagem rápida, mantendo você fresco e seco durante seus treinos mais intensos. Com um design que garante liberdade total de movimento, a Locus combina estilo, funcionalidade e inovação, tudo em uma peça exclusiva e limitada da Alis.",
+        "additional_info": {
+            "recommended_for": "Corrida/Academia",
+            "composition": "100% poliamida"
+        }
+      },
+      "camisa-three-little-birds": {
+        "title": "Camisa Three Little Birds",
+        "price": "129,00",
+        "images": [
+            "./img/products/p2_1.jpg",
+            "./img/products/p2_2.jpg",
+            "./img/products/p1_1.jpg",
+            "./img/products/p1_2.jpg"
+        ],
+        colors: ["#000000"],
+        sizes: ["P", "M", "G", "GG", "XG"],
+        description: "A 'Three Little Birds' é uma peça de roupa perfeita para treinamentos de alto rendimento, feita de 100% poliamida dry fit, garantindo conforto, secagem rápida e ultra transpirante. Com um design neutro e básico, esta camisa se adapta perfeitamente ao seu estilo de vida ativo, mantendo a qualidade a cada uso. Ideal para qualquer atividade, é a peça perfeita para quem valoriza a funcionalidade e prioriza um estilo mais neutro.",
+        "additional_info": {
+            "recommended_for": "Corrida/Academia",
+            "composition": "100% poliamida"
+        }
+      },
+      "short-nigrum": {
+        "title": "Short Nigrum",
+        "price": "189,00",
+        "images": [
+            "./img/products/p1_1.jpg",
+            "./img/products/p1_2.jpg",
+            "./img/products/p2_1.jpg",
+            "./img/products/p2_2.jpg"
+        ],
+        colors: ["#000000"],
+        sizes: ["P", "M", "G"],
+        description: "O Short Nigrum oferece o equilíbrio perfeito entre conforto e performance. Ele garante leveza, respirabilidade e rápida secagem, ideal para treinos intensos ou momentos de lazer. Com um corte que proporciona liberdade de movimento e um design moderno, o Nigrum é uma peça exclusiva da Alis, disponível em edição limitada para quem valoriza estilo e funcionalidade.",
+        "additional_info": {
+            "recommended_for": "Corrida/Academia",
+            "composition": "95% poliamida, 5% elastano / Forro: 88% poliamida, 12% elastano"
+        }
+      },
+      "top-arbo": {
+        "title": "Top Arbo",
+        "price": "119,00",
+        "images": [
+            "./img/products/p1_1.jpg",
+            "./img/products/p1_2.jpg",
+            "./img/products/p2_1.jpg",
+            "./img/products/p2_2.jpg"
+        ],
+        colors: ["#84997E", "#000000"],
+        sizes: ["P", "M", "G"],
+        description: "O Top Arbo é a combinação perfeita de conforto e flexibilidade. Confeccionado com 84% poliamida e 16% elastano, ele oferece um ajuste firme e confortável, garantindo liberdade de movimento durante qualquer atividade. Seu design moderno e a cor verde vibrante fazem dele um uma peça essencial para quem busca estilo e funcionalidade. Exclusivo da Alis, o Top Arbo está disponível em edição limitada, perfeito para quem valoriza peças únicas.",
+        "additional_info": {
+            "recommended_for": "Corrida/Academia",
+            "composition": "84% poliamida, 16% elastano"
+        }
+      },
+      "top-mavros": {
+        "title": "Top Mavros",
+        "price": "119,00",
+        "images": [
+            "./img/products/p2_1.jpg",
+            "./img/products/p2_1.jpg",
+            "./img/products/p1_1.jpg",
+            "./img/products/p1_2.jpg"
+        ],
+        colors: ["#000000", "#84997E"],
+        sizes: ["P", "M", "G"],
+        description: "O Top Mávros é a escolha ideal para quem busca suporte e estilo em uma única peça. Feito com 84% poliamida e 16% elastano, ele oferece elasticidade e conforto, proporcionando um ajuste perfeito ao corpo e liberdade total de movimento. Com seu design sofisticado e cor preta clássica, o Mávros é versátil tanto para treinos quanto para o dia a dia. Como todas as peças da Alis, este top faz parte de uma edição limitada, unindo exclusividade e funcionalidade em cada detalhe.",
+        "additional_info": {
+            "recommended_for": "Corrida/Academia",
+            "composition": "84% poliamida, 16% elastano"
+        }
+      },
+      "top-guvi": {
+        "title": "Top Guvi",
+        "price": "119,00",
+        "images": [
+            "./img/products/p1_1.jpg",
+            "./img/products/p1_2.jpg",
+            "./img/products/p2_1.jpg",
+            "./img/products/p2_2.jpg"
+        ],
+        colors: ["#000000", "#BD632F"],
+        sizes: ["P", "M", "G"],
+        description: "O Top Guvi combina elegância e desempenho. Confeccionado com 88% poliamida e 12% elastano, ele oferece elasticidade e conforto superiores, garantindo um ajuste firme e liberdade total de movimento. Com seu design minimalista e cor preta, o Top Guvi é perfeito para treinos e momentos casuais. Exclusivo da Alis e disponível em edição limitada, ele une funcionalidade e estilo em uma peça essencial.",
+        "additional_info": {
+            "recommended_for": "Corrida/Academia",
+            "composition": "88% poliamida, 12% elastano"
+        }
+      },
+      "top-capulus": {
+        "title": "Top Cápulus",
+        "price": "119,00",
+        "images": [
+            "./img/products/p2_1.jpg",
+            "./img/products/p2_2.jpg",
+            "./img/products/p1_1.jpg",
+            "./img/products/p1_2.jpg"
+        ],
+        colors: ["#BD632F", "#000000"],
+        sizes: ["P", "M", "G"],
+        description: "O Top Cápulus é a combinação perfeita de estilo e funcionalidade. Produzido com 88% poliamida e 12% elastano, ele oferece conforto, elasticidade e um ajuste ideal para movimentos livres durante qualquer atividade. Seu design sofisticado na cor café traz elegância e versatilidade, tornando-o ideal tanto para treinos quanto para uso casual. Como todas as peças da Alis, o Top Cápulus é exclusivo e faz parte de uma edição limitada, garantindo singularidade e alta performance.",
+        "additional_info": {
+            "recommended_for": "Corrida/Academia",
+            "composition": "88% poliamida, 12% elastano"
+        }
+      },
+      "legging-guvi": {
+        "title": "Legging Guvi",
+        "price": "199,00",
+        "images": [
+            "./img/products/p1_1.jpg",
+            "./img/products/p1_2.jpg",
+            "./img/products/p2_1.jpg",
+            "./img/products/p2_2.jpg"
+        ],
+        colors: ["#000000", "#BD632F"],
+        sizes: ["P", "M", "G"],
+        description: "A Legging Guvi é a escolha ideal para quem busca conforto e desempenho em um só produto. Confeccionada com 88% poliamida e 12% elastano, oferece uma elasticidade superior e um ajuste perfeito, permitindo total liberdade de movimento. Sua cor preta clássica e design elegante tornam-na versátil para treinos intensos e uso diário. Exclusiva da Alis e disponível em edição limitada, a Legging Guvi combina estilo e funcionalidade em uma peça essencial para o seu guarda-roupa.",
+        "additional_info": {
+            "recommended_for": "Corrida/Academia",
+            "composition": "88% poliamida, 12% elastano"
+        }
+      },
+      "legging-capulus": {
+        "title": "Legging Cápulus",
+        "price": "199,00",
+        "images": [
+            "./img/products/p2_1.jpg",
+            "./img/products/p2_2.jpg",
+            "./img/products/p1_1.jpg",
+            "./img/products/p1_2.jpg"
+        ],
+        colors: ["#BD632F", "#000000"],
+        sizes: ["P", "M", "G"],
+        description: "A Legging Cápulus une conforto e estilo de forma excepcional. Feita com 88% poliamida e 12% elastano, oferece um ajuste perfeito e elasticidade, garantindo liberdade total de movimento. Sua cor café sofisticada e design moderno fazem dela uma peça versátil para treinos e uso diário. Exclusiva da Alis e disponível em edição limitada, a Legging Cápulus é a escolha idela para quem busca performance e elegância em uma única peça.",
+        "additional_info": {
+            "recommended_for": "Corrida/Academia",
+            "composition": "88% poliamida, 12% elastano"
+        }
+      },
+      "short-arbo": {
+        "title": "Short Arbo",
+        "price": "169,00",
+        "images": [
+            "./img/products/p1_1.jpg",
+            "./img/products/p1_2.jpg",
+            "./img/products/p2_1.jpg",
+            "./img/products/p2_2.jpg"
+        ],
+        colors: ["#84997E", "#000000"],
+        sizes: ["P", "M", "G"],
+        description: "O Short Arbo oferece o equilíbrio perfeito entre conforto e flexibilidade. Confeccionado com 84% poliamida e 16% elastano, ele se adapta ao corpo com leveza, garantindo liberdade total de movimento. Seu design moderno e a cor verde vibrante fazem dele uma peça essencial para treinos ou momentos casuais. Exclusivo da Alis e em edição limitada, o Short Arbo combina estilo e funcionalidade em uma peça única.",
+        "additional_info": {
+            "recommended_for": "Corrida/Academia",
+            "composition": "84% poliamida, 16% elastano"
+        }
+      },
+      "short-mavros": {
+        "title": "Short Mávros",
+        "price": "169,00",
+        "images": [
+            "./img/products/p2_1.jpg",
+            "./img/products/p2_2.jpg",
+            "./img/products/p1_1.jpg",
+            "./img/products/p1_2.jpg"
+        ],
+        colors: ["#000000", "#84997E"],
+        sizes: ["P", "M", "G"],
+        description: "O Short Feminino Mávros combina estilo e conforto em uma peça versátil. Feito com 84% poliamida e 16% elastano, ele oferece um ajuste perfeito ao corpo, proporcionando liberdade de movimento para qualquer atividade. Com seu design moderno e cor preta clássica, o Short Mávros é ideal tanto para treinos quanto para o uso casual. Parte de uma edição limitada da Alis, ele é a escolha certa para quem busca exclusividade e funcionalidade.",
+        "additional_info": {
+            "recommended_for": "Corrida/Academia",
+            "composition": "84% poliamida, 16% elastano"
+        }
+      },
+    };
+
+    const productColorMapping = {
+        "top-arbo": {
+            "#84997E": { linkedProductID: "top-arbo", linkedColor: "#84997E" },  // Verde
+            "#000000": { linkedProductID: "top-mavros", linkedColor: "#000000" },  // Preto
+        },
+        "top-mavros": {
+            "#000000": { linkedProductID: "top-mavros", linkedColor: "#000000" },  // Preto
+            "#84997E": { linkedProductID: "top-arbo", linkedColor: "#84997E" },  // Verde
+        },
+        "top-guvi": {
+            "#000000": { linkedProductID: "top-guvi", linkedColor: "#000000" }, // Preto
+            "#BD632F": { linkedProductID: "top-capulus", linkedColor: "#BD632F" }, // Café
+        },
+        "top-capulus": {
+            "#BD632F": { linkedProductID: "top-capulus", linkedColor: "#BD632F" }, // Café
+            "#000000": { linkedProductID: "top-guvi", linkedColor: "#000000" }, // Preto
+        },
+        "legging-guvi": {
+            "#000000": { linkedProductID: "legging-guvi", linkedColor: "#000000" }, // Preto
+            "#BD632F": { linkedProductID: "legging-capulus", linkedColor: "#BD632F" }, // Café
+        },
+        "legging-capulus": {
+            "#BD632F": { linkedProductID: "legging-capulus", linkedColor: "#BD632F" }, // Café
+            "#000000": { linkedProductID: "legging-guvi", linkedColor: "#000000" }, // Preto
+        },
+        "short-arbo": {
+            "#84997E": { linkedProductID: "short-arbo", linkedColor: "#84997E" },  // Verde
+            "#000000": { linkedProductID: "short-mavros", linkedColor: "#000000" },  // Preto
+        },
+        "short-mavros": {
+            "#000000": { linkedProductID: "short-mavros", linkedColor: "#000000" },  // Preto
+            "#84997E": { linkedProductID: "short-arbo", linkedColor: "#84997E" },  // Verde
+        },
+    };
+
+    // Get the product ID from the URL query parameters
+    function getProductID() {
+        const params = new URLSearchParams(window.location.search);
+        return params.get('product');
+    }
+    
+    // Function to toggle the visibility of additional info
+    function toggleInfo(button) {
+        const infoItem = button.parentElement;
+        const infoContent = button.nextElementSibling;
+    
+        // Toggle the clicked info item
+        if (infoItem.classList.contains('active')) {
+            infoItem.classList.remove('active');
+            infoContent.style.display = 'none';
+        } else {
+            infoItem.classList.add('active');
+            infoContent.style.display = 'block';
+        }
+    }
+
+    // Function to load product details
+    function loadProductDetails(productID) {
+        const product = products[productID];
+
+        if (!product) {
+            console.error('Product not found:', productID);
+            return;
+        }
+
+        // Set the product title and price
+        const productTitle = product.title.toUpperCase();
+        document.getElementById('product-title').textContent = productTitle;
+        document.getElementById('product-price').textContent = `R$${product.price}`;
+
+        // Populate the product images
+        const mainImage = document.getElementById('main-product-image');
+        const thumbnailsContainer = document.getElementById('product-thumbnails');
+        mainImage.src = product.images[0];
+        thumbnailsContainer.innerHTML = '';  // Clear existing thumbnails
+
+        product.images.forEach((imageSrc) => {
+            const img = document.createElement('img');
+            img.src = imageSrc;
+            img.onclick = () => { mainImage.src = imageSrc; };
+            thumbnailsContainer.appendChild(img);
+        });
+
+        // Populate color options
+        const colorContainer = document.getElementById('color-options-container');
+        const selectedColorName = document.getElementById('selected-color-name');
+        colorContainer.innerHTML = '';  // Clear any existing options
+
+        product.colors.forEach((color, index) => {
+            const colorSwatch = document.createElement('div');
+            colorSwatch.classList.add('color-swatch');
+            colorSwatch.style.backgroundColor = color;
+
+            const colorName = (color === '#84997E') ? 'Verde' : (color === '#000000') ? 'Preto' : (color === '#BD632F') ? 'Café' : 'Cor';
+
+            // Default selection of the first color
+            if (index === 0) {
+                colorSwatch.classList.add('selected');
+                selectedColorName.textContent = colorName;
+            }
+
+            colorSwatch.onclick = () => {
+                // Check if the clicked color has a linked product
+                const linkedProduct = productColorMapping[productID] && productColorMapping[productID][color];
+                if (linkedProduct) {
+                    const newProductID = linkedProduct.linkedProductID;
+                    const newColor = linkedProduct.linkedColor;
+
+                    // Immediately redirect to the new product's detail page with the new color
+                    window.location.href = `${window.location.pathname}?product=${newProductID}&color=${newColor}`;
+                } else {
+                    document.querySelectorAll('.color-swatch').forEach(swatch => {
+                        swatch.classList.remove('selected');
+                    });
+                    colorSwatch.classList.add('selected');
+                    selectedColorName.textContent = colorName;
+                }
+            };
+
+            colorContainer.appendChild(colorSwatch);
+        });
+
+        // Load sizes after loading product details
+        loadSizeOptions(product);
+    }
+
+    
+    // Function to load the size options
+    function loadSizeOptions(product) {
+        const sizeContainer = document.getElementById('sizes-options-container');
+        sizeContainer.innerHTML = '';  // Clear any existing sizes
+
+        product.sizes.forEach((size) => {
+            const sizeButton = document.createElement('div');
+            sizeButton.classList.add('size-button');
+            sizeButton.textContent = size;
+
+            sizeButton.onclick = () => {
+                document.querySelectorAll('.size-button').forEach(button => {
+                    button.classList.remove('selected');
+                });
+                sizeButton.classList.add('selected');
+                document.getElementById('selected-size-name').textContent = size;
+            };
+
+            sizeContainer.appendChild(sizeButton);
+        });
+    }
+
+    function loadAdditionalInfo(productID) {
+        const product = products[productID];
+
+        if (!product || !product.additional_info) {
+            console.error('Additional info not available for product:', productID);
+            return;
+        }
+
+        // Set product description
+        document.getElementById('product-description').textContent = product.description;
+
+        // Populate additional info accordion
+        document.getElementById('info-recommended').textContent = product.additional_info.recommended_for;
+        document.getElementById('info-composition').textContent = product.additional_info.composition;
+        document.getElementById('info-shipping').innerHTML = `
+            <p class="subtitle-info-shipping"><strong>Confira o prazo de entrega</strong></p>
+            <p>O prazo de entrega começa a contar a partir do faturamento do pedido.</p>
+            <p class="text-content-info-shipping">Para saber mais sobre nossas informações de entrega, <a href="#">clique aqui</a></p>
+
+            <p class="subtitle-info-shipping"><strong>Problemas com o produto?</strong></p>
+            <p>Para realizar a devolução, <a href="#">clique aqui.</a></p>
+            <p>Saiba mais em <a href="#">Política de Trocas e Devoluções</a></p>`;
+    }
+
+    const modelInfo = {
+        size: 'P',
+        height: '1.75m',
+        chest: '90cm',
+        waist: '80cm',
+        hip: '85cm'
+    };
+
+    //Function to populate the model information in the "Modelo" section
+    function populateModelInfo(modelData) {
+        const modelInfoContainer = document.getElementById('model-info');
+        modelInfoContainer.innerHTML = `
+            <p>O modelo veste: ${modelData.size}</p>
+            <ul>
+                <li>Altura: ${modelData.height}</li>
+                <li>Tórax: ${modelData.chest}</li>
+                <li>Cintura: ${modelData.waist}</li>
+                <li>Quadril: ${modelData.hip}</li>
+            </ul>
+        `;
+    }
+
+    // Call the function to populate the content
+    populateModelInfo(modelInfo);
+    
+    // Initialize product page on load
+    document.addEventListener('DOMContentLoaded', () => {
+        const productID = getProductID();  // Get the product ID from the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const selectedColor = urlParams.get('color');  // Get the color from the URL
+
+        if (productID) {
+            loadProductDetails(productID);
+
+            // Automatically select the color passed in the URL
+            if (selectedColor) {
+                const colorSwatches = document.querySelectorAll('.color-swatch');
+                colorSwatches.forEach(swatch => {
+                    if (swatch.style.backgroundColor === selectedColor) {
+                        swatch.click();  // Simulate click to switch color
+                    }
+                });
+            }
+        } else {
+            console.error('No product ID specified in URL.');
+        }
+    
+        // Add event listener to the "Add to Cart" button
+        const addToCartButton = document.querySelector('.btn-add-to-cart');
+        addToCartButton.addEventListener('click', () => {
+            const product = products[productID];
+            const selectedColorElement = document.querySelector('.color-swatch.selected');
+            const selectedSizeElement = document.querySelector('.size-button.selected');
+            const quantityInput = document.getElementById('quantity');
+    
+            if (!selectedColorElement || !selectedSizeElement) {
+                alert('Por favor, selecione uma cor e um tamanho.');
+                return;
+            }
+    
+            const selectedColor = document.getElementById('selected-color-name').textContent;
+            const selectedSize = document.getElementById('selected-size-name').textContent;
+            const quantity = parseInt(quantityInput.value);
+    
+            console.log(`Selected Product: ${product.title}, Color: ${selectedColor}, Size: ${selectedSize}, Quantity: ${quantity}`);
+    
+            addToCart(product.title.toUpperCase(), product.price, product.images[0], selectedColor, selectedSize, quantity);
+        });
+    });
+
+    // Quantity button functionality
+    document.addEventListener('DOMContentLoaded', () => {
+        const quantityInput = document.getElementById('quantity');
+        const minusBtn = document.querySelector('.minus');
+        const plusBtn = document.querySelector('.plus');
+        
+        // Initial check to disable the minus button if quantity is 1
+        if (parseInt(quantityInput.value) <= parseInt(quantityInput.min)) {
+            minusBtn.disabled = true;
+            minusBtn.style.cursor = 'not-allowed';
+        }
+        
+        minusBtn.addEventListener('click', () => {
+            let currentValue = parseInt(quantityInput.value);
+            if (currentValue > parseInt(quantityInput.min)) {
+                quantityInput.value = currentValue - 1;
+            }
+            
+            // Disable the minus button if the value is 1
+            if (parseInt(quantityInput.value) <= parseInt(quantityInput.min)) {
+                minusBtn.disabled = true;
+                minusBtn.style.cursor = 'not-allowed';
+            } else {
+                minusBtn.disabled = false;
+                minusBtn.style.cursor = 'pointer';
+            }
+        });
+        
+        plusBtn.addEventListener('click', () => {
+            let currentValue = parseInt(quantityInput.value);
+            if (currentValue < parseInt(quantityInput.max)) {
+                quantityInput.value = currentValue + 1;
+            }
+
+            // Enable the minus button since the quantity is increased
+            if (parseInt(quantityInput.value) > parseInt(quantityInput.min)) {
+                minusBtn.disabled = false;
+                minusBtn.style.cursor = 'pointer';
+            }
+        });
+
+        // Enable input of value through typing
+        quantityInput.addEventListener('input', () => {
+            if (parseInt(quantityInput.value) <= parseInt(quantityInput.min)) {
+                minusBtn.disabled = true;
+                minusBtn.style.cursor = 'not-allowed';
+            } else {
+                minusBtn.disabled = false;
+                minusBtn.style.cursor = 'pointer';
+            }
+        });
+    });
+
+    // Function to add the product to the cart
+    function addToCart(productName, productPrice, productImage, selectedColor, selectedSize, quantity = 1) {
+        // Log to verify the data passed to the cart
+        console.log(`Adding to cart: ${quantity} x ${productName} (Color: ${selectedColor}, Size: ${selectedSize})`);
+
+        const cartItem = {
+            name: productName,
+            price: productPrice,
+            image: productImage,
+            color: selectedColor,
+            size: selectedSize,
+            quantity: quantity
+        };
+
+        console.log('Cart Item:', cartItem); // Verify the cart item
+
+        // Get the cart from localStorage or initialize a new one if empty
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        // Check if the product already exists in the cart (same name, color, and size)
+        const existingProductIndex = cart.findIndex(item => item.name === cartItem.name && item.color === cartItem.color && item.size === cartItem.size);
+
+        if (existingProductIndex > -1) {
+            // If the product already exists in the cart, update its quantity
+            cart[existingProductIndex].quantity += cartItem.quantity;
+        } else {
+            // Otherwise, add the new product to the cart
+            cart.push(cartItem);
+        }
+
+        // Save the updated cart to localStorage
+        localStorage.setItem('cart', JSON.stringify(cart));
+
+        // Update the UI (e.g., cart count, cart items)
+        updateCartUI();
+
+        // Optionally, you can show a message or redirect to the cart page
+        alert(`${quantity}x ${productName} (Tamanho: ${selectedSize}, Cor: ${selectedColor}) adicionado(s) ao carrinho!`);
+    }
+
+    // Update the UI with the cart count and items
+    function updateCartUI() {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const cartCountElement = document.getElementById('cart-count');
+        const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+
+        // Update cart item count
+        cartCountElement.innerText = totalItems;
+
+        // Optionally, you can update the cart items in the cart sidebar
+        const cartItemsContainer = document.getElementById('cart-items-container');
+        cartItemsContainer.innerHTML = ''; // Clear previous items
+
+        cart.forEach(item => {
+            const cartItemElement = document.createElement('div');
+            cartItemElement.classList.add('cart-item');
+            cartItemElement.innerHTML = `
+                <div class="cart-item-image">
+                    <img src="${item.image}" alt="${item.name}">
+                </div>
+                <div class="cart-item-details">
+                    <p>${item.name}</p>
+                    <p>Cor: ${item.color}</p>
+                    <p>Tamanho: ${item.size}</p>
+                    <p>Quantidade: ${item.quantity}</p>
+                    <p>Preço: R$${(item.price * item.quantity).toFixed(2)}</p>
+                </div>
+            `;
+            cartItemsContainer.appendChild(cartItemElement);
+        });
+    }
+
+    </script>
+    <script src="./script.js"></script>
+    <script src="./cart.js"></script>
+    <script src="https://kit.fontawesome.com/4c87557831.js" crossorigin="anonymous"></script>
+    <script src="https://apis.google.com/js/api:client.js"></script>
+</body>
+</html>

@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nossos Produtos</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    
+    <section id="product-header">
+        <div class="logo-container">
+            <a href="index.html"><img src="./img/logo-preto.png" class="logo" alt="Alis Fitness Logo"></a>
+        </div>
+        
+        <div class="nav-menu">
+            <ul id="navbar">
+                <li><a href="#">LANÇAMENTO</a></li>
+                <li>
+                    <a href="#">MASCULINO</a>
+                    <div class="dropdown">
+                        <h4>ROUPAS MASCULINAS</h4>
+                        <ul>
+                            <li><a href="./camisas-masculino.html">Camisas</a></li>
+                            <li><a href="./shorts-masculino.html">Shorts</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a href="#">FEMININO</a>
+                    <div class="dropdown">
+                        <h4>ROUPAS FEMININAS</h4>
+                        <ul>
+                            <li><a href="./tops-feminino.html">Tops</a></li>
+                            <li><a href="./leggings-feminino.html">Leggings</a></li>
+                            <li><a href="./shorts-feminino.html">Shorts</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li><a href="#">OFERTAS</a></li>
+                <li><a href="#">COLEÇÕES</a></li>
+                <li><a href="#">SOBRE NÓS</a></li>
+                <!-- <li><a href="#">CONTATO</a></li> -->
+            </ul>
+        </div>
+
+        <div class="nav-extra">
+            <ul id="navbar-icons">
+                <li id="search-icon"><a href="#"><i class="fa-solid fa-magnifying-glass"></i></a></li>
+                <li id="cart-icon-container">
+                    <a href="#"><i class="fa-solid fa-bag-shopping" id="cart-icon"></i></a>
+                    <span id="cart-count">0</span>
+                </li>
+                <li id="user-icon"><a href=""><i class="fa-solid fa-user"></i></a></li>
+                <a href="#" id="close"><i class="fa-solid fa-xmark"></i></a>
+            </ul>
+        </div>
+
+        <div id="mobile">
+            <i id="bar" class="fa-solid fa-bars"></i>
+            <a href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
+            <a href="#"><i class="fa-solid fa-bag-shopping"></i></a>
+        </div>
+    </section>
+
+    <section id="produtos-promo-section">
+        <div id="promo-banner">
+            <div class="promo-text">
+                <p>Frete grátis a partir de R$290,00</p>
+                <p>Entregas para todo o Brasil</p>
+                <p>Frete grátis a partir de R$290,00</p>
+                <p>Entregas para todo o Brasil</p>
+                <p>Frete grátis a partir de R$290,00</p>
+                <p>Entregas para todo o Brasil</p>
+                <p>Frete grátis a partir de R$290,00</p>
+                <p>Entregas para todo o Brasil</p>
+                <p>Frete grátis a partir de R$290,00</p>
+                <p>Entregas para todo o Brasil</p>
+                <p>Frete grátis a partir de R$290,00</p>
+                <p>Entregas para todo o Brasil</p>
+                <p>Frete grátis a partir de R$290,00</p>
+                <p>Entregas para todo o Brasil</p>
+                <p>Frete grátis a partir de R$290,00</p>
+                <p>Entregas para todo o Brasil</p>
+            </div>
+
+            <div class="promo-text">
+                <p>Frete grátis a partir de R$290,00</p>
+                <p>Entregas para todo o Brasil</p>
+                <p>Frete grátis a partir de R$290,00</p>
+                <p>Entregas para todo o Brasil</p>
+                <p>Frete grátis a partir de R$290,00</p>
+                <p>Entregas para todo o Brasil</p>
+                <p>Frete grátis a partir de R$290,00</p>
+                <p>Entregas para todo o Brasil</p>
+                <p>Frete grátis a partir de R$290,00</p>
+                <p>Entregas para todo o Brasil</p>
+                <p>Frete grátis a partir de R$290,00</p>
+                <p>Entregas para todo o Brasil</p>
+                <p>Frete grátis a partir de R$290,00</p>
+                <p>Entregas para todo o Brasil</p>
+                <p>Frete grátis a partir de R$290,00</p>
+                <p>Entregas para todo o Brasil</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="content">
+        <h2 class="camisas-title">Nossos Produtos</h2>
+
+        <div class="main-content">
+            <aside id="filter-sidebar" class="camisas-filter">
+                <h3>Filtrar</h3>
+    
+                <div id="active-filters-container">
+                    <div id="active-filters"></div>
+                    <button id="clear-all-filters" style="display: none;">Apagar todos</button>
+                </div>
+                
+                <div id="filter-options-container">
+                    <div class="filter-group">
+                        <h4 onclick="toggleFilterSection(this)">
+                            Gênero
+                            <span class="arrow-icon"><i class="fa fa-chevron-down"></i></span>
+                        </h4>
+                        <div class="filter-options">
+                            <label><input type="checkbox" name="gender" value="Masculino"> Masculino</label><br>
+                            <label><input type="checkbox" name="gender" value="Feminino"> Feminino</label>
+                        </div>
+                    </div>
+                    <div class="filter-group">
+                        <h4 onclick="toggleFilterSection(this)">
+                            Produto
+                            <span class="arrow-icon"><i class="fa fa-chevron-down"></i></span>
+                        </h4>
+                        <div class="filter-options">
+                            <label><input type="checkbox" name="category" value="Camisas"> Camisas</label><br>
+                            <label><input type="checkbox" name="category" value="Shorts"> Shorts</label><br>
+                            <label><input type="checkbox" name="category" value="Top"> Top</label><br>
+                            <label><input type="checkbox" name="category" value="Acessórios"> Acessórios</label>
+                        </div>
+                    </div>
+                    <div class="filter-group">
+                        <h4 onclick="toggleFilterSection(this)">
+                            Tamanho
+                            <span class="arrow-icon"><i class="fa fa-chevron-down"></i></span>
+                        </h4>
+                        <div class="filter-options">
+                            <!-- <label><input type="checkbox" name="size" value="PP"> PP</label><br> -->
+                            <label><input type="checkbox" name="size" value="P"> P</label><br>
+                            <label><input type="checkbox" name="size" value="M"> M</label><br>
+                            <label><input type="checkbox" name="size" value="G"> G</label><br>
+                            <label><input type="checkbox" name="size" value="GG"> GG</label><br>
+                            <label><input type="checkbox" name="size" value="XG"> XG</label>
+                        </div>
+                    </div>
+                    <div class="filter-group">
+                        <h4 onclick="toggleFilterSection(this)">
+                            Cor
+                            <span class="arrow-icon"><i class="fa fa-chevron-down"></i></span>
+                        </h4>
+                        <div class="filter-options">
+                            <label><input type="checkbox" name="color" value="Vinho"> Vinho</label><br>
+                            <label><input type="checkbox" name="color" value="Vermelho"> Vermelho</label><br>
+                            <label><input type="checkbox" name="color" value="Preto"> Preto</label><br>
+                            <label><input type="checkbox" name="color" value="Branco"> Branco</label><br>
+                            <label><input type="checkbox" name="color" value="Azul"> Azul</label><br>
+                            <label><input type="checkbox" name="color" value="Verde"> Verde</label><br>
+                            <label><input type="checkbox" name="color" value="Café"> Café</label>
+                        </div>
+                    </div>
+                    <!-- <button id="apply-filters">Aplicar Filtros</button> -->
+                </div>
+            </aside>
+    
+            <section id="collection-section">
+                <div class="collection-grid">
+                    <div class="product" data-gender="Masculino" data-category="Camisas" data-size="P" data-color="Vinho">
+                        <div class="product-image">
+                            <a href="produtos.html">
+                                <img src="./img/products/p1_1.jpg" data-hover="./img/products/p1_2.jpg" alt="Produto 1">
+                            </a>
+                        </div>
+                        <div class="product-details">
+                            <p id="product-name">CAMISA ALIS MASCULINA</p>
+                            <p>R$129,90</p>
+                            <button class="add-to-cart-btn" onclick="addToCart('CAMISA ALIS MASCULINA', 129.90, './img/products/p1_1.jpg')">Adicionar ao Carrinho</button>
+                        </div>
+                    </div>
+        
+                    <div class="product" data-gender="Feminino" data-category="Shorts" data-size="M" data-color="Azul">
+                        <div class="product-image">
+                            <a href="produtos.html">
+                                <img src="./img/products/p2_1.jpg" data-hover="./img/products/p2_2.jpg" alt="Produto 2">
+                            </a>
+                        </div>
+                        <div class="product-details">
+                            <p id="product-name">SHORTS ALIS FEMININO</p>
+                            <p>R$159,90</p>
+                            <button class="add-to-cart-btn" onclick="addToCart('SHORTS ALIS FEMININO', 159.90, './img/products/p2_1.jpg')">Adicionar ao Carrinho</button>
+    
+                        </div>
+                    </div>
+        
+                    <div class="product" data-gender="Feminino" data-category="Top" data-size="GG" data-color="Preto">
+                        <div class="product-image">
+                            <img src="./img/products/p1_1.jpg" data-hover="./img/products/p1_2.jpg" alt="Produto 3">
+                        </div>
+                        <div class="product-details">
+                            <p id="product-name">TOP ALIS FEMININA</p>
+                            <p>R$169,90</p>
+                            <button class="add-to-cart-btn" onclick="addToCart('TOP ALIS FEMININA', 169.90, './img/products/p1_1.jpg')">Adicionar ao Carrinho</button>
+    
+                        </div>
+                    </div>
+        
+                    <div class="product" data-gender="Masculino" data-category="Acessórios" data-size="PP" data-color="Branco">
+                        <div class="product-image">
+                            <img src="./img/products/p2_1.jpg" data-hover="./img/products/p2_2.jpg" alt="Produto 4">
+                        </div>
+                        <div class="product-details">
+                            <p id="product-name">ÓCULOS ALIS MASCULINO</p>
+                            <p>R$299,90</p>
+                            <button class="add-to-cart-btn" onclick="addToCart('ÓCULOS ALIS MASCULINO', 299.90, './img/products/p2_1.jpg')">Adicionar ao Carrinho</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </section>
+
+    <div id="page-overlay"></div>
+
+    <div id="cart-sidebar" class="cart-sidebar-hidden">
+        <div class="cart-sidebar-header">
+            <h3>CARRINHO</h3>
+            <button id="close-cart" class="close-cart-btn">&times;</button>
+        </div>
+
+        <div id="free-shipping-container">
+            <p id="free-shipping-text">Frete grátis a partir de R$290,00</p>
+            <div id="progress-bar-container">
+                <div id="progress-bar"></div>
+            </div>
+        </div>
+
+        <div id="cart-items-container"></div>
+
+        <div id="empty-cart-message" style="display:none;">
+            <p class="empty-cart-text">Seu Carrinho está vazio!</p>
+            <p class="empty-cart-subtext">Clique no botão abaixo e procure pelo seu produto!</p>
+            <button id="find-products-btn" class="find-products-btn">PROCURAR</button>
+        </div>
+
+        <div class="cart-sidebar-footer">
+            <p id="cart-subtotal">Subtotal: R$0,00</p>
+            <button id="checkout-btn" class="checkout-btn">Finalizar Compra</button>
+        </div>
+    </div>
+
+    <footer class="section-p1">
+        <div class="top-footer">
+            <!-- <div class="logo-container">
+                <a href="index.html"><img src="./img/alis - frase vectorizada_Prancheta 1 cópia (1).png" class="logo" alt="Slogan 'All Life is Simple'"></a>
+            </div> -->
+
+            <div class="newsletter">
+                <div class="news-text">
+                    <p>Gostou dos nossos produtos? Cadastre-se e fique por dentro das nossas novidades e ofertas.</p>
+                </div>
+    
+                <div class="form">
+                    <input type="email" placeholder="Insira seu e-mail" class="newsletter-input">
+                    <button class="newsletter-btn">Cadastrar</button>
+                    <a href="#"><i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom-footer">
+            <div class="col">
+                <h4>Contato</h4>
+                <p><strong>E-mail:</strong> alisoriginalfitness@gmail.com</p>
+                <p><strong>Whatsapp:</strong> +55 (85) 92001-4169</p>
+                <p><strong>Horário de atendimento:</strong> de segunda à sábado <br> 08:00-18:00</p>
+            </div>
+
+            <div class="col">
+                <h4>Dúvidas</h4>
+                <a href="#">Sobre nós</a>
+                <a href="#">Informações de entrega</a>
+                <a href="#">Política de Privacidade</a>
+                <a href="#">Termos & Condições</a>
+                <a href="#">Fale Conosco</a>
+            </div>
+    
+            <div class="col">
+                <h4>Minha Conta</h4>
+                <a href="#">Entrar</a>
+                <a href="#">Ver Carrinho</a>
+                <a href="#">Minha Lista de Desejos</a>
+                <a href="#">Rastrear Pedido</a>
+                <a href="#">Ajuda</a>
+            </div>
+
+            <!-- <div class="col">
+                <h4>Redes Sociais</h4>
+                <div class="icon">
+                    <i class="fab fa-facebook-f"></i>
+                    <i class="fab fa-instagram"></i>
+                    <i class="fab fa-pinterest-p"></i>
+                    <i class="fab fa-youtube"></i>
+                </div>
+            </div> -->
+
+            <div class="col">
+                <h4>Formas de Pagamento</h4>
+                <div class="pay-icons">
+                    <img class="visa-img" src="./img/pay/visa-logo.png" alt="">
+                    <img class="pix-img" src="./img/pay/logo-pix.png" alt="">
+                    <img class="mastercard-img" src="./img/pay/mastercard-logo.png" alt="">
+                    <img class="paypal-img" src="./img/pay/paypal-logo.png" alt="">
+                </div>
+            </div>
+        </div>
+
+        <div id="copyright">
+            <p>CNPJ "XXXXXXXX" - © 2024 Alis - Todos os direitos reservados.</p>
+            <p>Desenvolvido por João Lucas Paiva</p>
+        </div>
+    </footer>
+
+    <script>
+        const activeFiltersContainer = document.getElementById('active-filters');
+        const clearAllButton = document.getElementById('clear-all-filters');
+        const filterOptions = document.querySelectorAll('#filter-options-container input[type="checkbox"]');
+
+        filterOptions.forEach(option => {
+            option.addEventListener('change', () => {
+                applyFilters();
+                updateActiveFilters();
+            });
+        });
+
+        function applyFilters() {
+            const selectedGender = Array.from(document.querySelectorAll('input[name="gender"]:checked')).map(el => el.value);
+            const selectedCategory = Array.from(document.querySelectorAll('input[name="category"]:checked')).map(el => el.value);
+            const selectedSize = Array.from(document.querySelectorAll('input[name="size"]:checked')).map(el => el.value);
+            const selectedColor = Array.from(document.querySelectorAll('input[name="color"]:checked')).map(el => el.value);
+        
+            const products = document.querySelectorAll('.product');
+        
+            products.forEach(product => {
+                const productGender = product.getAttribute('data-gender');
+                const productCategory = product.getAttribute('data-category');
+                const productSize = product.getAttribute('data-size');
+                const productColor = product.getAttribute('data-color');
+        
+                let genderMatch = selectedGender.length === 0 || selectedGender.includes(productGender);
+                let categoryMatch = selectedCategory.length === 0 || selectedCategory.includes(productCategory);
+                let sizeMatch = selectedSize.length === 0 || selectedSize.some(size => productSize.includes(size));
+                let colorMatch = selectedColor.length === 0 || selectedColor.includes(productColor);
+        
+                if (genderMatch && categoryMatch && sizeMatch && colorMatch) {
+                    product.style.display = 'block';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+
+            updateActiveFilters();
+        }
+
+        function updateActiveFilters() {
+            const activeFiltersContainer = document.getElementById('active-filters');
+            activeFiltersContainer.innerHTML = ''; // Clear the previous active filters
+            let hasFilters = false;
+        
+            filterOptions.forEach(option => {
+                if (option.checked) {
+                    hasFilters = true;
+        
+                    // Create the active filter tag
+                    const filterTag = document.createElement('div');
+                    filterTag.classList.add('active-filter-tag');
+                    filterTag.setAttribute('data-filter', option.name);
+                    filterTag.setAttribute('data-value', option.value);
+                    filterTag.innerHTML = `${option.value} <span class="remove-filter">&times;</span>`;
+        
+                    // Make the whole filter tag clickable
+                    filterTag.addEventListener('click', function() {
+                        const filterName = this.getAttribute('data-filter');
+                        const filterValue = this.getAttribute('data-value');
+                        const filterCheckbox = document.querySelector(`input[name="${filterName}"][value="${filterValue}"]`);
+        
+                        if (filterCheckbox) {
+                            filterCheckbox.checked = false; // Uncheck the checkbox for the filter
+                            applyFilters(); // Re-apply filters
+                        }
+                    });
+        
+                    activeFiltersContainer.appendChild(filterTag);
+                }
+            });
+        
+            // Show or hide the clear-all button based on filters
+            const clearAllButton = document.getElementById('clear-all-filters');
+            clearAllButton.style.display = hasFilters ? 'block' : 'none';
+        }
+
+        clearAllButton.addEventListener('click', () => {
+            filterOptions.forEach(option => option.checked = false);
+            applyFilters();
+        });
+
+        function toggleFilterSection(header) {
+            header.classList.toggle('active');
+            let options = header.nextElementSibling;
+            if (options.style.display === "block") {
+                options.style.display = "none";
+            } else {
+                options.style.display = "block";
+            }
+        }
+
+        /* function addToCart(productName, productPrice) {
+            console.log(`${productName} adicionado ao carrinho por R${productPrice.toFixed(2)}`);
+        } */
+
+    </script>
+    <script src="./script.js"></script>
+    <script src="./cart.js"></script>
+    <script src="https://kit.fontawesome.com/4c87557831.js" crossorigin="anonymous"></script>
+    <script src="https://apis.google.com/js/api:client.js"></script>
+</body>
+</html>
