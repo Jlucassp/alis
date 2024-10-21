@@ -143,7 +143,7 @@
                 <ul>
                     <li class="selected" onclick="showContent('visaoGeral')"><a href="#">Visão Geral</a></li>
                     <li onclick="showContent('meusPedidos')"><a href="#">Meus Pedidos</a></li>
-                    <li onclick="showContent('detalhesConta')"><a href="#">Detalhes da Conta</a></li>
+                    <li onclick="showContent('dadosPessoais')"><a href="#">Dados Pessoais</a></li>
                     <li onclick="showContent('enderecos')"><a href="#">Endereços</a></li>
                     <li onclick="showContent('listaDesejos')"><a href="#">Lista de Desejos</a></li>
                     <li onclick="showContent('sair')"><a href="#">Sair</a></li>
@@ -176,12 +176,50 @@
                         </tbody>
                     </table>
                 </div>
-                <div id="detalhesConta" class="dashboard-content" style="display:none;">
-                    <h3>Detalhes da Conta</h3>
-                    <p><strong>Nome:</strong> <span id="account-name"></span></p>
-                    <p><strong>E-mail:</strong> <span id="account-email"></span></p>
-                    <p><strong>Telefone:</strong> <input type="text" id="account-phone" placeholder="(85) 90000-0000"></p>
-                    <button class="find-products-btn">Editar Detalhes</button>
+                <div id="dadosPessoais" class="dashboard-content" style="display:none;">
+                    <h3>Dados Pessoais</h3>
+                    <div class="personal-data-container">
+                        <!-- Box para Detalhes da Conta -->
+                         <div id="account-details" class="data-box">
+                            <h4>Detalhes da Conta</h4>
+                            <p><strong>Nome:</strong> <span id="account-name"></span></p>
+                            <p><strong>Data de Nascimento:</strong> <span id="account-birthday"></span></p>
+                            <p><strong>Gênero:</strong> <span id="account-gender"></span></p>
+                            <button id="edit-account-details" class="find-products-btn">Editar Detalhes</button>
+                         </div>
+
+                         <!-- Box para Detalhes de Login -->
+                        <div class="data-box">
+                            <h4>Detalhes de Login</h4>
+                            <p><strong>E-mail:</strong> <span id="account-email"></span></p>
+                            <p><strong>Senha:</strong> <input type="password" id="account-password" placeholder="**********" disabled></p>
+                            <button id="edit-email" class="find-products-btn">Editar E-mail</button>
+                            <button id="edit-password" class="find-products-btn">Editar Senha</button>
+                        </div>
+
+                        <!-- Formulário para Editar Detalhes da Conta -->
+                         <div id="editAccountDetails" class="data-box" style="display:none;">
+                            <h4>Editar Detalhes da Conta</h4>
+                            <form id="editDetailsForm">
+                                <label for="new-name">Nome:</label>
+                                <input type="text" id="new-name" required>
+
+                                <label for="new-birthday">Data de Nascimento:</label>
+                                <input type="date" id="new-birthday" required>
+
+                                <label for="new-gender">Gênero:</label>
+                                <select id="new-gender">
+                                    <option value="">Escolha um gênero</option>
+                                    <option value="masculino">Masculino</option>
+                                    <option value="feminino">Feminino</option>
+                                    <option value="outro">Outro</option>
+                                </select>
+
+                                <button type="submit" class="find-products-btn">Atualizar Informações</button>
+                                <button type="button" class="find-products-btn" id="cancelEdit">Cancelar</button>
+                            </form>
+                         </div>
+                    </div>
                 </div>
                 <div id="enderecos" class="dashboard-content" style="display:none;">
                     <div id="enderecos-header">
@@ -222,6 +260,7 @@
                                 <input type="text" id="cep_endereco" placeholder=" " required>
                                 <label for="cep_endereco">CEP</label>
                             </div>
+                            <a href="https://buscacepinter.correios.com.br/app/endereco/index.php?t#" target="_blank" id="link-buscar-cep">Não sabe seu CEP?</a>
                             <div class="input-container">
                                 <input type="text" id="endereco_endereco" placeholder=" " required>
                                 <label for="endereco_endereco">Endereço</label>
@@ -243,7 +282,36 @@
                                 <label for="cidade_endereco">Cidade</label>
                             </div>
                             <div class="input-container">
-                                <input type="text" id="estado_endereco" placeholder=" " required>
+                                <select id="estado_endereco" required>
+                                    <option value="" disabled selected>Selecione o Estado</option>
+                                    <option value="AC">Acre</option>
+                                    <option value="AL">Alagoas</option>
+                                    <option value="AP">Amapá</option>
+                                    <option value="AM">Amazonas</option>
+                                    <option value="BA">Bahia</option>
+                                    <option value="CE">Ceará</option>
+                                    <option value="DF">Distrito Federal</option>
+                                    <option value="ES">Espírito Santo</option>
+                                    <option value="GO">Goiás</option>
+                                    <option value="MA">Maranhão</option>
+                                    <option value="MT">Mato Grosso</option>
+                                    <option value="MS">Mato Grosso do Sul</option>
+                                    <option value="MG">Minas Gerais</option>
+                                    <option value="PA">Pará</option>
+                                    <option value="PB">Paraíba</option>
+                                    <option value="PR">Paraná</option>
+                                    <option value="PE">Pernambuco</option>
+                                    <option value="PI">Piauí</option>
+                                    <option value="RJ">Rio de Janeiro</option>
+                                    <option value="RN">Rio Grande do Norte</option>
+                                    <option value="RS">Rio Grande do Sul</option>
+                                    <option value="RO">Rondônia</option>
+                                    <option value="RR">Roraima</option>
+                                    <option value="SC">Santa Catarina</option>
+                                    <option value="SP">São Paulo</option>
+                                    <option value="SE">Sergipe</option>
+                                    <option value="TO">Tocantins</option>
+                                </select>
                                 <label for="estado_endereco">Estado</label>
                             </div>
                             <div class="form-buttons">
@@ -252,6 +320,7 @@
                             </div>
                         </form>
                     </div>
+                    <div id="enderecos-container" style="display: flex; flex-wrap: wrap; gap: 20px;"></div>
                 </div>
                 <div id="listaDesejos" class="dashboard-content" style="display:none;">
                     <h3>Lista de Desejos</h3>

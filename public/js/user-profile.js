@@ -89,6 +89,63 @@ function adicionarPedido(id, data, status, total) {
     renderPedidos(); // Atualiza a interface
 }
 
+// ------------------------------------------------ Edição de Dados Pessoais -------------------------------------------------
+
+// Função para renderizar os detalhes da conta
+function renderAccountDetails() {
+    const userName = sessionStorage.getItem('userName');
+    const name = userName || "Não definido";
+    const birthday = localStorage.getItem('account-birthday') || "Não definido";
+    const gender = localStorage.getItem('account-gender') || "Não definido";
+
+    document.getElementById('account-name').textContent = name;
+    document.getElementById('account-birthday').textContent = birthday;
+    document.getElementById('account-gender').textContent = gender;
+}
+
+// Ao clicar em "Editar Detalhes"
+document.getElementById('edit-account-details').addEventListener('click', function() {
+    // Preencher o formulário com os dados atuais
+    document.getElementById('new-name').value = localStorage.getItem('account-name') || '';
+    document.getElementById('new-birthday').value = localStorage.getItem('account-birthday') || '';
+    document.getElementById('new-gender').value = localStorage.getItem('account-gender') || '';
+
+    // Mostrar o formulário e ocultar os detalhes
+    document.getElementById('account-details').style.display = 'none';
+    document.getElementById('editAccountDetails').style.display = 'block';
+});
+
+// Ao cancelar a edição
+document.getElementById('cancelEdit').addEventListener('click', function() {
+    document.getElementById('editAccountDetails').style.display = 'none';
+    document.getElementById('account-details').style.display = 'block';
+});
+
+// Ao enviar o formulário de edição
+document.getElementById('editDetailsForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Evita o envio padrão do formulário
+
+    // Obter novos valores
+    const newName = document.getElementById('new-name').value;
+    const newBirthday = document.getElementById('new-birthday').value;
+    const newGender = document.getElementById('new-gender').value;
+
+    // Salvar os dados no localStorage
+    localStorage.setItem('account-name', newName);
+    localStorage.setItem('account-birthday', newBirthday);
+    localStorage.setItem('account-gender', newGender);
+
+    // Atualizar a visualização
+    renderAccountDetails();
+
+    // Ocultar o formulário e mostrar a seção de Dados Pessoais novamente
+    document.getElementById('editAccountDetails').style.display = 'none';
+    document.getElementById('account-details').style.display = 'block';
+});
+
+// Renderiza os detalhes ao carregar a página
+renderAccountDetails();
+
 // -------------------------------------------------- Edição de Endereço --------------------------------------------------
 // Elementos da seção de endereços
 const enderecosView = document.getElementById('enderecos-view');
@@ -103,6 +160,8 @@ let editIndex = null; // Índice do endereço que está sendo editado
 
 // Renderiza os endereços na tela
 function renderEnderecos() {
+    const enderecosContainer = document.getElementById('enderecos-container');
+    enderecosContainer.innerHTML = ''; // Limpa o conteúdo anterior
     enderecosView.innerHTML = ''; // Limpa o conteúdo anterior
 
     // Exibe o botão "Adicionar Endereço" abaixo do título
@@ -120,19 +179,8 @@ function renderEnderecos() {
         addButton.onclick = showEditForm; // Correção na referência de evento
 
         enderecosView.appendChild(addButton);
+        enderecosContainer.style.display = 'none';
     } else {
-        enderecos.forEach((endereco, index) => {
-            const enderecoDiv = document.createElement('div');
-            enderecoDiv.className = 'endereco-item';
-            enderecoDiv.innerHTML = `
-                <p>${endereco.endereco}, ${endereco.numero} - ${endereco.bairro}, ${endereco.cidade} - ${endereco.estado}, ${endereco.pais}. CEP: ${endereco.cep}</p>
-                <button class="editar-info-endereco-btn" data-index="${index}">Editar</button>
-                <button class="excluir-endereco-btn" data-index="${index}">Excluir</button>
-                <hr />
-            `;
-            enderecosView.appendChild(enderecoDiv);
-        });
-
         // Exibe o botão "Adicionar Endereço" abaixo da lista de endereços
         const addButton = document.createElement('button');
         addButton.id = 'editar-endereco-btn';
@@ -141,7 +189,108 @@ function renderEnderecos() {
         addButton.onclick = showEditForm; // Correção na referência de evento
 
         enderecosView.appendChild(addButton);
+
+        enderecos.forEach((endereco, index) => {
+            const enderecoDiv = document.createElement('div');
+            enderecoDiv.className = 'endereco-item';
+            if (endereco.isDefault) {
+                enderecoDiv.style.border = '1px solid #424240';
+            }
+            enderecoDiv.innerHTML += `
+                <h4>${endereco.nome} ${endereco.sobrenome}</h4>
+                <p>${endereco.endereco}, ${endereco.numero}</p>
+                <p>${endereco.complemento}</p>
+                <p>${endereco.bairro}</p>
+                <p>${endereco.cidade}, ${endereco.estado}, ${endereco.cep}, ${endereco.pais}</p>
+                <p>${endereco.telefone}</p>
+                <div class="endereco-buttons">
+                    <button class="editar-info-endereco-btn" data-index="${index}">Editar</button>
+                    <button class="excluir-endereco-btn" data-index="${index}">Excluir</button>
+                </div>
+                <div class="default-buttons">
+                    ${endereco.isDefault ? `<span class="padrao">Padrão</span>` : `<button class="set-default-btn" data-index="${index}">Definir como padrão</button>`}
+                </div>
+            `;
+            enderecosContainer.appendChild(enderecoDiv);
+        });
+
+        enderecosContainer.style.display = 'flex'; // Exibe o container com os endereços
+
+        // Adiciona os eventos aos botões de editar e excluir
+        addEditAndDeleteEvents();
+        addSetDefaultEvent();
     }
+}
+
+// Função para definir o endereço como padrão
+function addSetDefaultEvent() {
+    const setDefaultButtons = document.querySelectorAll('.set-default-btn');
+    setDefaultButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            const index = button.dataset.index;
+
+            // Remove a marcação de padrão de todos os endereços
+            enderecos.forEach((endereco) => {
+                endereco.isDefault = false; // Reseta todos para não padrão
+            });
+
+            enderecos[index].isDefault = true; // Define o endereço clicado como padrão
+
+            // Salva no localStorage e re-renderiza os endereços
+            localStorage.setItem(`enderecos_${userEmail}`, JSON.stringify(enderecos));
+            renderEnderecos();
+        });
+    });
+}
+
+function addEditAndDeleteEvents() {
+    const editarButtons = document.querySelectorAll('.editar-info-endereco-btn');
+    const excluirButtons = document.querySelectorAll('.excluir-endereco-btn');
+
+    editarButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            editIndex = button.dataset.index; // Salva o índice do endereço que será editado
+            const endereco = enderecos[editIndex];
+
+            // Preencher o formulário de edição
+            document.getElementById('nome_endereco').value = endereco.nome;
+            document.getElementById('sobrenome_endereco').value = endereco.sobrenome;
+            document.getElementById('cpf_endereco').value = endereco.cpf;
+            document.getElementById('telefone_endereco').value = endereco.telefone;
+            document.getElementById('pais_endereco').value = endereco.pais;
+            document.getElementById('cep_endereco').value = endereco.cep;
+            document.getElementById('endereco_endereco').value = endereco.endereco;
+            document.getElementById('numero_endereco').value = endereco.numero;
+            document.getElementById('complemento_endereco').value = endereco.complemento;
+            document.getElementById('bairro_endereco').value = endereco.bairro;
+            document.getElementById('cidade_endereco').value = endereco.cidade;
+            document.getElementById('estado_endereco').value = endereco.estado;
+
+            ajustarLabels();
+
+            enderecosView.style.display = 'none';
+            enderecosEditForm.style.display = 'block';
+            enderecosHeader.style.display = 'none';
+            adicionarEnderecoHeader.style.display = 'block';
+
+            const enderecosContainer = document.getElementById('enderecos-container');
+            enderecosContainer.style.display = 'none';
+
+            // Muda o texto do botão para "Atualizar Endereço"
+            adicionarEnderecoBtn.textContent = 'Atualizar Endereço';
+        });
+    });
+
+    excluirButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            const index = button.dataset.index;
+            if (confirm("Tem certeza que deseja excluir este endereço?")) {
+                enderecos.splice(index, 1); // Remove o endereço da lista
+                localStorage.setItem(`enderecos_${userEmail}`, JSON.stringify(enderecos));
+                renderEnderecos();
+            }
+        });
+    });
 }
 
 // Mostrar o formulário para adicionar um novo endereço
@@ -159,58 +308,21 @@ function showEditForm() {
         resetLabel(input); // Resetando o label ao adicionar novo endereço
     });
 
+    document.getElementById('estado_endereco').value = "";
+
     // Muda o texto do botão para "Adicionar Endereço"
     adicionarEnderecoBtn.textContent = 'Adicionar Endereço';
     editIndex = null; // Reseta o índice
+
+    // Limpa o contêiner de endereços
+    const enderecosContainer = document.getElementById('enderecos-container');
+    enderecosContainer.style.display = 'none'; // Limpa o conteúdo anterior
 }
 
 // Função para resetar o label
 function resetLabel(input) {
     definirLabel(input.nextElementSibling, false); // Reseta o label ao adicionar novo endereço
 }
-
-// Delegação de evento para o botão "Editar Endereço" dentro de enderecosView
-enderecosView.addEventListener('click', function (event) {
-    if (event.target && event.target.classList.contains('editar-info-endereco-btn')) {
-        editIndex = event.target.dataset.index; // Salva o índice do endereço que será editado
-        const endereco = enderecos[editIndex];
-
-        // Preencher o formulário de edição
-        document.getElementById('nome_endereco').value = endereco.nome;
-        document.getElementById('sobrenome_endereco').value = endereco.sobrenome;
-        document.getElementById('cpf_endereco').value = endereco.cpf;
-        document.getElementById('telefone_endereco').value = endereco.telefone;
-        document.getElementById('pais_endereco').value = endereco.pais;
-        document.getElementById('cep_endereco').value = endereco.cep;
-        document.getElementById('endereco_endereco').value = endereco.endereco;
-        document.getElementById('numero_endereco').value = endereco.numero;
-        document.getElementById('complemento_endereco').value = endereco.complemento;
-        document.getElementById('bairro_endereco').value = endereco.bairro;
-        document.getElementById('cidade_endereco').value = endereco.cidade;
-        document.getElementById('estado_endereco').value = endereco.estado;
-
-        // Ajustar os labels conforme os valores
-        ajustarLabels();
-
-        enderecosView.style.display = 'none';
-        enderecosEditForm.style.display = 'block';
-        enderecosHeader.style.display = 'none';
-        adicionarEnderecoHeader.style.display = 'block';
-
-        // Muda o texto do botão para "Atualizar Endereço"
-        adicionarEnderecoBtn.textContent = 'Atualizar Endereço';
-    }
-
-    // Lógica para o botão "Excluir"
-    if (event.target && event.target.classList.contains('excluir-endereco-btn')) {
-        const index = event.target.dataset.index;
-        if (confirm("Tem certeza que deseja excluir este endereço?")) {
-            enderecos.splice(index, 1); // Remove o endereço da lista
-            localStorage.setItem(`enderecos_${userEmail}`, JSON.stringify(enderecos));
-            renderEnderecos();
-        }
-    }
-});
 
 // Função para definir as propriedades do label
 function definirLabel(label, isActive) {
@@ -249,6 +361,8 @@ cancelarEdicaoBtn.addEventListener('click', function () {
         input.classList.remove('input-error');
         resetLabel(input);
     });
+
+    renderEnderecos();
 });
 
 // Função de validação para os campos do formulário de endereço
@@ -260,12 +374,12 @@ function validarCamposEndereco() {
         { id: 'cpf_endereco', validar: validarCPF, mensagemErro: 'O CPF deve estar no formato correto.' },
         { id: 'telefone_endereco', validar: validarTelefone, mensagemErro: 'Telefone deve estar no formato correto.' },
         { id: 'pais_endereco' },
-        { id: 'cep_endereco', validar: validarCEP, mensagemErro: 'CEP deve estar no formato correto (ex: 12345-678).' },
+        { id: 'cep_endereco', validar: validarCEP, mensagemErro: 'O CEP fornecido está incompleto.' },
         { id: 'endereco_endereco' },
-        { id: 'numero_endereco' },
+        { id: 'numero_endereco', validar: validarNumero },
         { id: 'bairro_endereco' },
         { id: 'cidade_endereco' },
-        { id: 'estado_endereco' },
+        { id: 'estado_endereco', validar: validarEstado },
     ];
 
     // Variável para armazenar o primeiro campo com erro
@@ -388,7 +502,15 @@ function validarTelefone(telefone) {
 
 // Validação de CEP
 function validarCEP(cep) {
-    return /^\d{5}-?\d{3}$/.test(cep);
+    return /^\d{5}-\d{3}$/.test(cep);
+}
+
+function validarNumero(numero) {
+    return /^\d+$/.test(numero);
+}
+
+function validarEstado(estado) {
+    return estado !== "";
 }
 
 // Formatação automática do CPF
@@ -492,6 +614,79 @@ document.getElementById('pais_endereco').addEventListener('change', function() {
     definirLabel(label, true);
 });
 
+// Formatação automática do CEP
+document.getElementById('cep_endereco').addEventListener('input', function (e) {
+    let cep = e.target.value.replace(/\D/g, '');
+
+    // Limitar o número máximo de dígitos
+    if (cep.length > 8) {
+        cep = cep.substring(0, 8);
+    }
+
+    // Adiciona o hífen após os 5 primeiros dígitos
+    if (cep.length > 5) {
+        cep = cep.replace(/(\d{5})(\d)/, '$1-$2');
+    }
+
+    e.target.value = cep; // Atualiza o campo de entrada
+});
+
+// Validação de CEP ao perder o foco
+document.getElementById('cep_endereco').addEventListener('blur', function() {
+    const cep = this.value.replace(/\D/g, '');
+
+    if (!cep) {
+        exibirMensagemErro(this, 'Campo obrigatório.');
+        this.classList.add('input-error');
+    } else if (cep.length === 8) {
+        fetch(`https://viacep.com.br/ws/${cep}/json/`)
+            .then(response => response.json())
+            .then(data => {
+                if (!data.erro) { // Verifica se o CEP é válido
+                    document.getElementById('endereco_endereco').value = data.logradouro;
+                    document.getElementById('bairro_endereco').value = data.bairro;
+                    document.getElementById('cidade_endereco').value = data.localidade;
+                    document.getElementById('estado_endereco').value = data.uf;
+
+                    ajustarLabels();
+                } else {
+                    exibirMensagemErro(this, 'CEP não encontrado.');
+                }
+            })
+            .catch(error => {
+                console.error('Erro ao buscar o CEP:', error);
+                exibirMensagemErro(this, 'Ocorreu um erro ao buscar o CEP. Tente novamente.');
+            });
+    } else {
+        exibirMensagemErro(this, 'CEP inválido. Certifique-se de que tem 8 dígitos.');
+    }
+});
+
+// Filtrar entrada para permitir apenas números
+document.getElementById('numero_endereco').addEventListener('input', function (e) {
+    this.value = this.value.replace(/[^0-9]/g, '');
+});
+
+document.getElementById('estado_endereco').addEventListener('change', function() {
+    const label = this.nextElementSibling;
+    definirLabel(label, true);
+});
+
+// Adicione o evento blur ao select do estado
+document.getElementById('estado_endereco').addEventListener('blur', function() {
+    const input = this;
+    const label = input.parentNode.querySelector('label[for="' + input.id + '"]');
+    const valor = input.value;
+
+    if (!valor) {
+        exibirMensagemErro(input, 'Campo obrigatório.');
+        input.classList.add('input-error');
+        definirLabel(label, true);
+    } else {
+        definirLabel(label, true);
+    }
+});
+
 // Função para validar DDD
 function validarDDD(ddd) {
     return /^(11|12|13|14|15|16|17|18|19|21|22|24|27|28|31|32|33|34|35|37|38|41|42|43|44|45|46|47|48|49|51|53|54|55|61|62|63|64|65|66|67|68|69|71|73|74|75|77|79|81|82|83|84|85|86|87|88|89|91|92|93|94|95|96|97|98|99)$/.test(ddd);
@@ -533,8 +728,7 @@ function atualizarErro(input) {
     } 
     // Se o campo não está vazio, verifica as validações específicas (nome, sobrenome, etc.)
     else if ((campoId === 'nome_endereco' && !validarNome(valor)) ||
-             (campoId === 'sobrenome_endereco' && !validarSobrenome(valor)) ||
-             (campoId === 'cep_endereco' && !validarCEP(valor))) {
+             (campoId === 'sobrenome_endereco' && !validarSobrenome(valor))) {
         input.classList.add('input-error');
         let mensagemErro = obterMensagemErro(campoId);
         exibirMensagemErro(input, mensagemErro);
@@ -613,9 +807,33 @@ adicionarEnderecoBtn.addEventListener('click', function () {
 
     // Se estamos editando um endereço, atualiza-o, caso contrário, adiciona um novo
     if (editIndex !== null) {
-        enderecos[editIndex] = { nome, sobrenome, cpf, telefone, pais, cep, endereco, numero, complemento, bairro, cidade, estado };
+        const enderecoAtual = enderecos[editIndex];
+        const isDefault = enderecoAtual.isDefault; // Armazena se era padrão
+
+        // Atualiza o endereço
+        enderecos[editIndex] = { nome, sobrenome, cpf, telefone, pais, cep, endereco, numero, complemento, bairro, cidade, estado, isDefault };
     } else {
-        enderecos.push({ nome, sobrenome, cpf, telefone, pais, cep, endereco, numero, complemento, bairro, cidade, estado });
+        // Adiciona um novo endereço
+        const novoEndereco = { nome, sobrenome, cpf, telefone, pais, cep, endereco, numero, complemento, bairro, cidade, estado, isDefault: false };
+
+        // Verifica se já existe algum endereço padrão
+        const enderecoPadrao = enderecos.find(endereco => endereco.isDefault);
+        if (!enderecoPadrao) {
+            novoEndereco.isDefault = true; // Define como padrão se não existir nenhum
+        }
+
+        enderecos.push(novoEndereco);
+    }
+
+    const novoEndereco = { nome, sobrenome, cpf, telefone, pais, cep, endereco, numero, complemento, bairro, cidade, estado, isDefault: false };
+
+    // Remove qualquer outro padrão, se o novo endereço for padrão
+    if (novoEndereco.isDefault) {
+        enderecos.forEach(e => {
+            if (e !== novoEndereco) {
+                e.isDefault = false; // Remove o padrão do endereço anterior
+            }
+        });
     }
 
     // Salva os endereços no localStorage
