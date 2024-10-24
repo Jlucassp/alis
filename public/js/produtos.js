@@ -2,6 +2,28 @@ const activeFiltersContainer = document.getElementById('active-filters');
 const clearAllButton = document.getElementById('clear-all-filters');
 const filterOptions = document.querySelectorAll('#filter-options-container input[type="checkbox"]');
 
+// Função para aplicar o efeito de data-hover
+function applyHoverEffect() {
+    const products = document.querySelectorAll('.product-image img');
+
+    products.forEach((img) => {
+        const originalSrc = img.src;
+        const hoverSrc = img.getAttribute('data-hover');
+
+        if (hoverSrc) {
+            img.addEventListener('mouseover', () => { 
+                img.src = hoverSrc; 
+            });
+            img.addEventListener('mouseout', () => { 
+                img.src = originalSrc; 
+            });
+        }
+    });
+}
+
+// Chama a função para aplicar o efeito de hover
+applyHoverEffect();
+
 filterOptions.forEach(option => {
     option.addEventListener('change', () => {
         applyFilters();

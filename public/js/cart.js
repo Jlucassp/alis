@@ -204,5 +204,5 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 document.getElementById('find-products-btn').addEventListener('click', function() {
-    window.location.href = 'produtos.html';
+    window.location.href = 'drop-satus.html';
 });

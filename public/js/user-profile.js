@@ -89,62 +89,72 @@ function adicionarPedido(id, data, status, total) {
     renderPedidos(); // Atualiza a interface
 }
 
-// ------------------------------------------------ Edição de Dados Pessoais -------------------------------------------------
+document.addEventListener('DOMContentLoaded', function() {
+    // ------------------------------------------------ Edição de Dados Pessoais -------------------------------------------------
 
-// Função para renderizar os detalhes da conta
-function renderAccountDetails() {
-    const userName = sessionStorage.getItem('userName');
-    const name = userName || "Não definido";
-    const birthday = localStorage.getItem('account-birthday') || "Não definido";
-    const gender = localStorage.getItem('account-gender') || "Não definido";
+    // Função para renderizar os detalhes da conta
+    function renderAccountDetails() {
+        const userName = sessionStorage.getItem('userName');
+        const name = userName || "Não definido";
+        const birthday = localStorage.getItem('account-birthday') || "Não definido";
+        const gender = localStorage.getItem('account-gender') || "Não definido";
 
-    document.getElementById('account-name').textContent = name;
-    document.getElementById('account-birthday').textContent = birthday;
-    document.getElementById('account-gender').textContent = gender;
-}
+        document.getElementById('account-name').textContent = name;
+        document.getElementById('account-birthday').textContent = birthday;
+        document.getElementById('account-gender').textContent = gender;
+    }
 
-// Ao clicar em "Editar Detalhes"
-document.getElementById('edit-account-details').addEventListener('click', function() {
-    // Preencher o formulário com os dados atuais
-    document.getElementById('new-name').value = localStorage.getItem('account-name') || '';
-    document.getElementById('new-birthday').value = localStorage.getItem('account-birthday') || '';
-    document.getElementById('new-gender').value = localStorage.getItem('account-gender') || '';
+    // Ao clicar em "Editar Detalhes"
+    document.getElementById('edit-account-details').addEventListener('click', function() {
+        const name = localStorage.getItem('account-name') || '';
+        const birthday = localStorage.getItem('account-birthday') || '';
+        const gender = localStorage.getItem('account-gender') || '';
 
-    // Mostrar o formulário e ocultar os detalhes
-    document.getElementById('account-details').style.display = 'none';
-    document.getElementById('editAccountDetails').style.display = 'block';
+        const editHtml = `
+            <h4>Editar Detalhes da Conta</h4>
+            <form id="editDetailsForm">
+                <label for="new-name">Nome:</label>
+                <input type="text" id="new-name" value="${name}" required>
+
+                <label for="new-birthday">Data de Nascimento:</label>
+                <input type="date" id="new-birthday" value="${birthday}" required>
+
+                <label for="new-gender">Gênero:</label>
+                <select id="new-gender">
+                    <option value="">Escolha um gênero</option>
+                    <option value="masculino" ${gender === 'masculino' ? 'selected' : ''}>Masculino</option>
+                    <option value="feminino" ${gender === 'feminino' ? 'selected' : ''}>Feminino</option>
+                    <option value="outro" ${gender === 'outro' ? 'selected' : ''}>Outro</option>
+                </select>
+
+                <button type="submit" class="find-products-btn">Atualizar Informações</button>
+                <button type="button" class="find-products-btn" id="cancelEdit">Cancelar</button>
+            </form>
+        `;
+
+        document.getElementById('account-details').innerHTML = editHtml;
+
+        document.getElementById('cancelEdit').addEventListener('click', function() {
+            renderAccountDetails(); // Retorna aos detalhes
+        });
+
+        document.getElementById('editDetailsForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const newName = document.getElementById('new-name').value;
+            const newBirthday = document.getElementById('new-birthday').value;
+            const newGender = document.getElementById('new-gender').value;
+
+            localStorage.setItem('account-name', newName);
+            localStorage.setItem('account-birthday', newBirthday);
+            localStorage.setItem('account-gender', newGender);
+
+            renderAccountDetails(); // Atualiza a visualização
+        });
+    });
+
+    renderAccountDetails(); // Renderiza os detalhes ao carregar a página
 });
-
-// Ao cancelar a edição
-document.getElementById('cancelEdit').addEventListener('click', function() {
-    document.getElementById('editAccountDetails').style.display = 'none';
-    document.getElementById('account-details').style.display = 'block';
-});
-
-// Ao enviar o formulário de edição
-document.getElementById('editDetailsForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // Evita o envio padrão do formulário
-
-    // Obter novos valores
-    const newName = document.getElementById('new-name').value;
-    const newBirthday = document.getElementById('new-birthday').value;
-    const newGender = document.getElementById('new-gender').value;
-
-    // Salvar os dados no localStorage
-    localStorage.setItem('account-name', newName);
-    localStorage.setItem('account-birthday', newBirthday);
-    localStorage.setItem('account-gender', newGender);
-
-    // Atualizar a visualização
-    renderAccountDetails();
-
-    // Ocultar o formulário e mostrar a seção de Dados Pessoais novamente
-    document.getElementById('editAccountDetails').style.display = 'none';
-    document.getElementById('account-details').style.display = 'block';
-});
-
-// Renderiza os detalhes ao carregar a página
-renderAccountDetails();
 
 // -------------------------------------------------- Edição de Endereço --------------------------------------------------
 // Elementos da seção de endereços
